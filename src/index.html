@@ -7,23 +7,25 @@
 
     <style>
         body {
-            margin: 0px;
-            padding: 0px;
+            margin: 0;
+            padding: 0;
             background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         #myCanvas {
-            border: 1px solid red;
-            height: 100px;
-            width: 100px;
             display: block;
+            background-color: #ffffff;
         }
     </style>
 </head>
 <body>
-    <canvas id="myCanvas"> </canvas> 
+    <canvas id="myCanvas" width="500" height="500"></canvas> 
 
     <script src="poisson-disc.js"></script>
-    <script>PoissonDisc(5, [100, 100])</script>
+    <script>PoissonDisc(5, [500, 500])</script>
 </body>
 </html>
