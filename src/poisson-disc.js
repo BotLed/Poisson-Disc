@@ -43,16 +43,11 @@ function PoissonDisc(radius, gridSize, maxTries = 20) {
 
             const neighbourPoint = [angleX, angleY];
             console.log(neighbourPoint);
-            drawPoint(ctx, neighbourPoint[0], neighbourPoint[1], "white");
-
-            if(isValid) {
-                finalizedPoints.push(neighbourPoint);
-                spawnedPoints.push(neighbourPoint);
-            }
-
-        return;
+            drawPoint(ctx, neighbourPoint[0], neighbourPoint[1], "black");
 
         }
+
+        return;
     }
 }
 
@@ -61,9 +56,8 @@ function isValid() {
 
 }
 
-function drawPoint(ctx, x, y, color) {
+function drawPoint(ctx, x, y, color = "black") {
     ctx.beginPath();
-    ctx.moveTo(x, y);
     ctx.arc(x, y, 1, 0, 2 * Math.PI, true);
     ctx.fillStyle = color;
     ctx.fill();
@@ -72,14 +66,13 @@ function drawPoint(ctx, x, y, color) {
 
 function drawCircle(ctx, x, y, radius) {
     ctx.beginPath();
-    ctx.beginPath();
-    ctx.moveTo(x, y);
     ctx.arc(x, y, radius, 0, 2 * Math.PI, true);
-    ctx.strokeStyle = 'red';        // Set the outline color (optional)
-    ctx.lineWidth = 1;              // Set the outline width (optional)
+    ctx.strokeStyle = 'rgba(255, 0, 0, 0.6)';
+    ctx.lineWidth = 1.5;
     ctx.stroke(); 
     ctx.closePath();
 }
+
 
 
 
