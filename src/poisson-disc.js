@@ -1,4 +1,3 @@
-
 // radius : int -> represents the minimum distance we want between points.
 // gridSize : 2D Vector / Array => represents the grid dimensions in which to generate points.
 function PoissonDisc(radius, gridSize, maxTries = 20) {
@@ -13,7 +12,7 @@ function PoissonDisc(radius, gridSize, maxTries = 20) {
 
 
     const cellSize = radius/Math.sqrt(2); // Achieved via pythagorean theorem where: r^2 = cellsize^2 + cellsize^2
-    const grid = [Math.ceil(x/cellSize), Math.ceil(y/cellSize)];
+    const grid = [[Math.ceil(x/cellSize)], [Math.ceil(y/cellSize)]];
 
     const finalizedPoints = [];
     const spawnedPoints = [];
@@ -29,7 +28,6 @@ function PoissonDisc(radius, gridSize, maxTries = 20) {
         
         // Retrieve the actual point at the index
         spawnCenter = spawnedPoints[spawnedPointIndex]; 
-        console.log(spawnCenter);
         drawPoint(ctx, spawnCenter[0], spawnCenter[1], "red"); 
         drawCircle(ctx, spawnCenter[0], spawnCenter[1], outerCircle);
 
@@ -40,19 +38,32 @@ function PoissonDisc(radius, gridSize, maxTries = 20) {
             
             angleX = spawnCenter[0] + Math.cos(angle) * randomScaler;
             angleY = spawnCenter[1] + Math.sin(angle) * randomScaler;
+            neighbourAccepted = false;
 
             const neighbourPoint = [angleX, angleY];
             console.log(neighbourPoint);
             drawPoint(ctx, neighbourPoint[0], neighbourPoint[1], "black");
+            console.log(grid);
 
+            if(isValid(neighbourPoint)) {
+                points.push(neighbourPoint);
+                spawnedPoints.push(neighbourPoint);
+                grid[[neighbourPoint[0]/cellSize], [neighbourPoint[1]/cellSize]] = points.length;
+                neighbourAccepted = true;
+                break;
+            }
         }
 
-        return;
+        if(!neighbourAccepted) {
+            spawnedPoints.splice(spawnedPointIndex, 1);
+        }
+
+        return finalizedPoints;
     }
 }
 
 
-function isValid() {
+function isValid(neighbourPoint, gridSize, cellSize, finalizedPoints, spawnedPoints) {
 
 }
 
